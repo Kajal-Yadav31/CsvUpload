@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="row justify-content-center mt-7 " style=" margin: auto; width: 90%; height:60">
+        <div class="col-md-7 text-center" style="margin-top:8rem;">
+           <h1 style="color:navy; font-weight:bold; font-size:3rem;">Upload your csv here!!</h1>
+        </div>
+        <div class="col-md-7 text-center" style="margin-top:3rem; background-color:skyblue; padding-top:3rem; padding-bottom:5rem; font-weight:bold;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg active" style="margin-top:3rem;">Upload</button>
+        </form>
+    </div>
+
+    </div>
+
+{% endblock %}

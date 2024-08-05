@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    th, td {
+        border: 1px solid #000; /* Add border to both table headers and cells */
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    h2 {
+        font-weight: bold;
+        text-decoration: underline;
+        color: #007bff;
+        margin-bottom:2rem;
+    }
+    h3 {
+        color: #9370DB;
+        font-weight: bold;
+        margin-bottom:1rem;
+    }
+</style>
+
+<div class="row justify-content-center mt-7 " style=" margin: auto; width: 90%; height:60">
+    <div style=" margin-top:9rem; background-color:white;">
+        <div class="col-md-7 text-center" style="margin-top:4rem;">
+            <h1 style="color:navy; font-weight:bold; font-size:3rem; margin-left:4rem; margin-bottom:3rem;">Data Analysis for <b><u><i>{{ dataset_name }} <i><u><b></h1>
+         </div>
+
+    <h2>Shape of the data</h2>
+    {{ shape|safe}}
+
+    <h2>First Few Rows</h2>
+    {{head|safe}}
+
+    <h2>sample of the dataset</h2>
+    {{sample|safe}}
+
+    <h2>Description of the dataset</h2>
+    {{ description|safe }}
+
+    <h2>missing values of the dataset</h2>
+    {{ missing|safe }}
+
+    <h2>Handling Missing Values :- </h2>
+{% if missing_html != "No missing values in the dataset" %}
+    <h3>Missing Values</h3>
+    {{ missing_html|safe }}
+
+    <h3>Filling Null Values</h3>
+    {{ filled_data|safe }}
+
+    <h3>Dropping Rows</h3>
+    {{ dropped_rows_data|safe }}
+
+{% else %}
+    <p style="margin-bottom:2rem; ">There are no missing values in the dataset.</p>
+{% endif %}
+
+
+    <h2>Ploting the graph :- </h2>
+    <h3>Histograms</h3>
+    {% if hist_plot %}
+        <img src="data:image/png;base64,{{ hist_plot }}" alt="Histogram Plot" />
+    {% else %}
+        <p>No histogram available</p>
+    {% endif %}
+
+    <h3>Bar Plot</h3>
+    {% if bar_plot %}
+        <img src="data:image/png;base64,{{ bar_plot }}" alt="Bar Plot" />
+    {% else %}
+        <p>No bar plot available</p>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
